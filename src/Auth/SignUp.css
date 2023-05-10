@@ -1,0 +1,64 @@
+.signUp__background {
+    background-color: var(--primary-color);
+    padding: 30px;
+    color: white;
+    margin-bottom: 60px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+.signUp__content {
+    padding: 0px 10px;
+    width: 75%;
+    margin: auto;
+}
+
+.signUp__content form input {
+    margin-bottom: 10px !important;
+}
+.signUp{
+    margin-top: 50px;
+}
+.password-strength{
+    width: 0%;
+    display: block;
+    height: 5px;
+    background: transparent;
+    transition: all 300ms ease-in-out;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+}
+
+.password-strength[data-score="null"]{
+    width: 0;
+    background-color: red;
+}
+.password-strength[data-score="0"] {
+    width: 5%;
+    background-color: #f44336;
+}
+.password-strength[data-score="1"] {
+    width: 25%;
+    background-color: #f44336;
+}
+.password-strength[data-score="2"] {
+    width: 50%;
+    background-color: #ffeb3b;
+}
+.password-strength[data-score="3"] {
+    width: 50%;
+    background-color: #ffeb3b;
+}
+.password-strength[data-score="4"] {
+    width: 75%;
+    background-color: rgb(36, 132, 36);
+}
+.password-strength[data-score="5"] {
+    width: 100%;
+    background-color: rgb(9, 214, 9);
+}

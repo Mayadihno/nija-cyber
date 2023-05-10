@@ -1,0 +1,12 @@
+.box{
+    margin-top: 40px;
+}
+.form{
+    background-color: black;
+    padding: 20px;
+    color: white;
+}
+.form__content{
+    width: 85%;
+    margin: auto;
+}

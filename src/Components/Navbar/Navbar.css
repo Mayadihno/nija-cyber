@@ -1,0 +1,135 @@
+.navbar {
+    background-color:var(--primary-color);
+    color: white;
+    padding: 15px ;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.navbar__container {
+    width: 93%;
+    margin: auto;
+}
+
+.navbar__flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar__logo a {
+    text-decoration: none;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.logo i{
+   color: green;
+   
+}
+.logo span{
+    text-align: center;
+   font-style: italic;
+}
+
+.active-links {
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: var(--hero-bg);
+    padding: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.navbar__menu a {
+    color: var(--primary-color);
+    text-decoration: none;
+    margin: 0px 20px;
+    font-size: 18px;
+}
+
+/* Mobile screen navbar styling */
+.navbar__menu__container {
+    display: none;
+    position: relative;
+    margin-top: 16px;
+}
+
+.navbar__container__menu {
+    display: flex;
+    color: white;
+    /* justify-content: flex-end; */
+    /* align-items: flex-end; */
+    flex-direction: column;
+    text-align: left;
+    background-color: var(--primary-color);
+    padding: 32px;
+    top: 40px;
+    right: 0;
+    /* margin-right: 5px; */
+    position: absolute;
+    z-index: 999;
+    margin-top: 10px;
+    min-width: 100vw;
+    box-shadow: 0 0 5 rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+/* Media query for Navbar */
+@media screen and (max-width:550px) {
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .navbar__middle {
+        display: none;
+    }
+
+    .navbar__right {
+        display: none;
+    }
+
+    .navbar__menu__container {
+        display: flex;
+    }
+
+    .navbar__links a {
+        line-height: 60px;
+        display: flex;
+        flex-direction: column;
+        font-size: 20px;
+        font-weight: 400;
+        font-style: italic;
+    }
+
+    .active-links {
+        background-color: transparent !important;
+    }
+
+    .navbar__links button {
+        color: white;
+    }
+
+    .navbar__rights {
+        margin-top: 30px;
+    }
+
+    .navbar__rights button {
+        margin: 0 10px;
+    }
+}

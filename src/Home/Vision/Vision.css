@@ -1,0 +1,29 @@
+.vision{
+    margin-top: 30px;
+}
+.vision__content{
+    width: 85%;
+    margin: auto;
+}
+.vision__flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 30px;
+}
+
+.vision__image img{
+    width: 2000px;
+    height: 600px;
+    object-fit: contain;
+}
+.vision__text h2{
+    font-size: 35px;
+    font-style: italic;
+    font-weight: 500;
+    padding-bottom: 13px;
+}
+.vision__text p{
+    line-height: 30px;
+    padding-bottom: 20px;
+}
