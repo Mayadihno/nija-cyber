@@ -11,6 +11,7 @@ const Manubar = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     await signOut(auth);
+    localStorage.removeItem("email");
     navigate("/", { replace: true });
   };
 
