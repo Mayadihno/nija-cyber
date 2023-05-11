@@ -39,13 +39,13 @@ const Navbar = () => {
           {toggle ? (
             <RiCloseLine
               size={35}
-              color="black"
+              color="white"
               onClick={() => setToggle(false)}
             />
           ) : (
             <AiOutlineMenu
               size={35}
-              color="black"
+              color="white"
               onClick={() => setToggle(true)}
             />
           )}

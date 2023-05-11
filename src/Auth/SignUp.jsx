@@ -1,4 +1,4 @@
-import { Button, Input, Select } from "@chakra-ui/react";
+import { Box, Button, Input, Select } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import "./SignUp.css";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -7,12 +7,14 @@ import { toast } from "react-toastify";
 import zxcvbn from "zxcvbn";
 import ReCAPTCHA from "react-google-recaptcha";
 import { auth, db } from "../Firebase/Config";
+import { Link, useNavigate } from "react-router-dom";
 const SignUp = () => {
   const [change, setChange] = useState("");
   const [gender, setGender] = useState("");
   const [score, setScore] = useState("null");
   const [token, setToken] = useState(false);
   const captchaRef = useRef(null);
+  const navigate = useNavigate();
   const handleChanges = (e) => {
     setGender(e.target.value);
   };
@@ -40,7 +42,7 @@ const SignUp = () => {
         toast.warning("password and confrim password are not correct");
       }
       const users = await createUserWithEmailAndPassword(auth, email, password);
-      updateProfile("auth".currentUser, {
+      updateProfile(auth.currentUser, {
         displayName: fullname,
         PhoneNumber: phoneNumber,
         Email: email,
@@ -54,6 +56,7 @@ const SignUp = () => {
 
       await setDoc(doc(db, "users", usersData.uid), formDataCopy);
       toast.success("You have successfull create account");
+      navigate("/welcome", { replace: true });
       e.target.reset();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -175,12 +178,27 @@ const SignUp = () => {
                 onChange={onChange}
                 ref={captchaRef}
               />
-              {token && (
-                <Button type="submit" variant={"solid"} colorScheme="whatsapp">
-                  Sign Up
-                </Button>
-              )}
+              <Box sx={{ pt: "20px" }}>
+                {token ? (
+                  <Button
+                    type="submit"
+                    variant={"solid"}
+                    colorScheme="whatsapp"
+                  >
+                    Sign Up
+                  </Button>
+                ) : (
+                  <Button variant={"outline"} colorScheme="gray">
+                    Sign Up
+                  </Button>
+                )}
+              </Box>
             </form>
+            <div className="already">
+              <p>
+                Already have an account? <Link to={"/signIn"}>Sign In</Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

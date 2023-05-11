@@ -10,3 +10,12 @@
 .footer__text{
     text-align: center;
 }
+@media screen and (max-width:760px){
+   .footer__content{
+    width: 95%;
+   }
+   .footer__text h2{
+    font-size: 18px;
+    padding: 5px;
+   }
+}

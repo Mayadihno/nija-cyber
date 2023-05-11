@@ -18,3 +18,15 @@
     height: 55vh !important;
     object-fit: fill;
 }
+@media screen and (max-width:760px){
+    .event__grid{
+        grid-template-columns: repeat(1,1fr);
+        row-gap: 15px;
+    }
+    .event .card img{
+        height: 35vh !important;
+    }
+    .event__content{
+        width: 95%;
+    }
+}

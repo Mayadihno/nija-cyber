@@ -5,6 +5,8 @@ import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Home/Home";
 import Login from "./Auth/Login";
 import Welcome from "./Components/Welcome";
+import { SignIn } from "./Auth/SignIn";
+import ProtectedRoute from "./Components/Protected/ProtectedRouth";
 function App() {
   return (
     <>
@@ -12,7 +14,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/signIn" element={<SignIn />} />
+        <Route path="/*" element={<ProtectedRoute />}>
+          <Route path="/*/welcome" element={<Welcome />} />
+        </Route>
       </Routes>
       <Footer />
     </>

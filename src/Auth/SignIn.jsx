@@ -4,7 +4,7 @@
 import "./SignIn.css";
 import React, { useState, useEffect, useRef } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import {
   isSignInWithEmailLink,
   sendSignInLinkToEmail,
@@ -13,9 +13,10 @@ import {
 import "./SignIn.css";
 // import { toast } from "react-toastify";
 import { auth } from "../Firebase/Config";
-import { Button, Input } from "@chakra-ui/react";
+import { Box, Button, Input } from "@chakra-ui/react";
 import zxcvbn from "zxcvbn";
 import ReCAPTCHA from "react-google-recaptcha";
+
 export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [user] = useAuthState(auth);
@@ -47,6 +48,7 @@ export const SignIn = () => {
       setScore(0);
     }
   };
+
   useEffect(() => {
     if (user) {
       // user is already signed in
@@ -77,10 +79,11 @@ export const SignIn = () => {
           .catch((err) => {
             setInitialLoading(false);
             setInitialError(err.message);
-            navigate("/login");
+            navigate("/welcome");
           });
       } else {
-        console.log("enter email and sign in");
+        // console.log("enter email and sign in");
+        // captchaRef.current.reset();
       }
     }
   }, [user, search, navigate]);
@@ -89,7 +92,7 @@ export const SignIn = () => {
     e.preventDefault();
     setLoginLoading(true);
     sendSignInLinkToEmail(auth, email, {
-      url: "http://127.0.0.1:5174/welcome",
+      url: "http://localhost:5174/*/welcome",
       handleCodeInApp: true,
     })
       .then(() => {
@@ -97,6 +100,7 @@ export const SignIn = () => {
         setLoginLoading(false);
         setLoginError("");
         setInfoMsg("We have sent you an email with a link to sign in");
+        e.target.reset();
       })
       .catch((err) => {
         setLoginLoading(false);
@@ -119,52 +123,68 @@ export const SignIn = () => {
                 ) : (
                   <div className="form">
                     <div className="form__content">
+                      <h2>Login with your register email</h2>
                       <form onSubmit={handleSubmit}>
                         <label>Email</label>
                         <Input
                           type={"email"}
                           required
-                          variant={"flushed"}
+                          variant={"filled"}
                           placeholder="Enter Email"
                           value={email || ""}
                           onChange={(e) => setEmail(e.target.value)}
                         />
+                        <label>Password</label>
                         <Input
                           type="password"
                           required
                           onChange={handleChange}
                           name="password"
-                          variant={"flushed"}
+                          variant={"filled"}
                           placeholder="Enter Password"
                         />
                         <span
                           className="password-strength"
                           data-score={score}
                         />
+
                         <ReCAPTCHA
                           sitekey="6Les7PolAAAAAEbGHpgfEDckNoKB04CcBaMKZ6T9"
                           onChange={onChange}
                           ref={captchaRef}
                         />
-                        {token && (
-                          <Button
-                            type="submit"
-                            variant={"solid"}
-                            colorScheme="whatsapp"
-                          >
-                            {loginLoading ? (
-                              <span>Logging you in</span>
-                            ) : (
-                              <span>Login</span>
-                            )}
-                          </Button>
-                        )}
+
+                        <Box sx={{ pt: "20px" }}>
+                          {token ? (
+                            <Button
+                              type="submit"
+                              variant={"solid"}
+                              colorScheme="whatsapp"
+                            >
+                              {loginLoading ? (
+                                <span>Logging you in</span>
+                              ) : (
+                                <span>Login</span>
+                              )}
+                            </Button>
+                          ) : (
+                            <Button variant={"outline"} colorScheme="gray">
+                              Sign in
+                            </Button>
+                          )}
+                        </Box>
                         {loginError !== "" && (
                           <div className="error-msg">{loginError}</div>
                         )}
                         {infoMsg !== "" && (
                           <div className="info-msg">{infoMsg}</div>
                         )}
+                        <div className="already">
+                          <p>
+                            Don't have an account?
+                            <Link to={"/login"}>Sign Up</Link>
+                          </p>
+                        </div>
                       </form>
                     </div>
                   </div>

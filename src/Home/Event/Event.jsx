@@ -10,7 +10,9 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 const Event = () => {
+  const navigate = useNavigate();
   return (
     <React.Fragment>
       <div className="event">
@@ -34,6 +36,7 @@ const Event = () => {
                         <Text>{data.date}</Text>
                       </Stack>
                       <Button
+                        onClick={() => navigate("/login")}
                         sx={{ mt: "20px" }}
                         variant="solid"
                         colorScheme="whatsapp"

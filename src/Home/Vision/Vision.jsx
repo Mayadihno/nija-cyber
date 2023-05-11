@@ -1,7 +1,9 @@
 import React from "react";
 import { Button } from "@chakra-ui/react";
 import "./Vision.css";
+import { useNavigate } from "react-router-dom";
 const Vision = () => {
+  const navigate = useNavigate();
   return (
     <React.Fragment>
       <div className="vision">
@@ -21,7 +23,11 @@ const Vision = () => {
                 local food programs to bring food to people facing hunger. We
                 advocate for policies that create long-term solutions to hunger.
               </p>
-              <Button variant={"solid"} colorScheme="whatsapp">
+              <Button
+                variant={"solid"}
+                colorScheme="whatsapp"
+                onClick={() => navigate("/login")}
+              >
                 Donate Now
               </Button>
             </div>

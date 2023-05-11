@@ -10,3 +10,13 @@
     width: 85%;
     margin: auto;
 }
+@media screen  and (max-width:760px){
+    .form__content{
+        width: 95%;
+    }
+    .form__content h2{
+        font-size: 20px;
+        padding-bottom: 10px;
+        text-align: center;
+    }
+}
