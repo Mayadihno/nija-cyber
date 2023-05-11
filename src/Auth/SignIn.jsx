@@ -92,7 +92,7 @@ export const SignIn = () => {
     e.preventDefault();
     setLoginLoading(true);
     sendSignInLinkToEmail(auth, email, {
-      url: "https://nija-donation.netlify.app/welcome",
+      url: "https://nija-cyber-app.onrender.com/welcome",
       handleCodeInApp: true,
     })
       .then(() => {
