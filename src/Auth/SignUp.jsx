@@ -1,4 +1,4 @@
-import { Box, Button, Input, Select } from "@chakra-ui/react";
+import { Box, Button, Input } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import "./SignUp.css";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -10,14 +10,12 @@ import { auth, db } from "../Firebase/Config";
 import { Link, useNavigate } from "react-router-dom";
 const SignUp = () => {
   const [change, setChange] = useState("");
-  const [gender, setGender] = useState("");
+
   const [score, setScore] = useState("null");
   const [token, setToken] = useState(false);
   const captchaRef = useRef(null);
   const navigate = useNavigate();
-  const handleChanges = (e) => {
-    setGender(e.target.value);
-  };
+
   function onChange(value) {
     setToken(value);
   }
@@ -25,7 +23,7 @@ const SignUp = () => {
     const newInput = { [e.target.name]: e.target.value };
     setChange({ ...change, ...newInput });
     if (e.target.value !== "") {
-      const formDataCopy = { ...change, gender: gender };
+      const formDataCopy = { ...change };
       let pass = zxcvbn(formDataCopy.password);
       setScore(pass.score);
     } else {
@@ -49,7 +47,7 @@ const SignUp = () => {
       });
 
       const usersData = users.user;
-      const formDataCopy = { ...change, gender: gender, score: score };
+      const formDataCopy = { ...change, score: score };
       delete formDataCopy.password;
       delete formDataCopy.confirm;
       formDataCopy.timestamp = serverTimestamp();
@@ -103,45 +101,6 @@ const SignUp = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="phones">
-                <label htmlFor="phone">Phone Number</label>
-                <Input
-                  type="tel"
-                  placeholder="Enter Phone Number"
-                  id="phone"
-                  size="md"
-                  name="phoneNumber"
-                  required
-                  onChange={handleChange}
-                  variant="outline"
-                />
-              </div>
-              <Select
-                placeholder={"Select gender"}
-                onChange={handleChanges}
-                required
-                name="gender"
-              >
-                <option style={{ color: "black" }} value={"male"}>
-                  Male
-                </option>
-                <option style={{ color: "black" }} value={"female"}>
-                  Female
-                </option>
-              </Select>
-              <div className="phones">
-                <label htmlFor="country">Country</label>
-                <Input
-                  type="text"
-                  placeholder="Enter country"
-                  id="country"
-                  size="md"
-                  name="country"
-                  required
-                  onChange={handleChange}
-                  variant="outline"
-                />
-              </div>
               <div className="password">
                 <label htmlFor="password">Password</label>
                 <Input
@@ -155,19 +114,7 @@ const SignUp = () => {
                   variant="outline"
                 />
               </div>
-              <div className="cpassword">
-                <label htmlFor="password">Confirm Password</label>
-                <Input
-                  type="password"
-                  placeholder="Enter Password"
-                  id="cpassword"
-                  size="md"
-                  name="confirm"
-                  required
-                  onChange={handleChange}
-                  variant="outline"
-                />
-              </div>
+
               <span className="password-strength" data-score={score} />
               <div className="privacy">
                 <input type="checkbox" style={{ marginRight: "10px" }} /> I

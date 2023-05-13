@@ -1,8 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Footer from "./Components/Footer/Footer";
-import Navbar from "./Components/Navbar/Navbar";
-import Home from "./Home/Home";
+// import Footer from "./Components/Footer/Footer";
+// import Navbar from "./Components/Navbar/Navbar";
 import Login from "./Auth/Login";
 import Welcome from "./Components/Welcome";
 import { SignIn } from "./Auth/SignIn";
@@ -10,13 +9,14 @@ import ProtectedRoute from "./Components/Protected/ProtectedRouth";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cards from "./Card/Card";
 function App() {
   const [scores, setScores] = useState(null);
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Cards />} />
         <Route path="/login" element={<Login />} />
         <Route
           path="/signIn"
@@ -30,7 +30,7 @@ function App() {
         </Route>
       </Routes>
       <ToastContainer position="top-left" />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
