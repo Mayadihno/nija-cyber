@@ -56,7 +56,7 @@ const SignUp = () => {
 
       await setDoc(doc(db, "users", usersData.uid), formDataCopy);
       toast.success("You have successfull create account");
-      navigate("/login", { replace: true });
+      navigate("/signIn", { replace: true });
       e.target.reset();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {

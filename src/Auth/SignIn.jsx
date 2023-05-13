@@ -17,7 +17,7 @@ import { Box, Button, Input } from "@chakra-ui/react";
 import zxcvbn from "zxcvbn";
 import ReCAPTCHA from "react-google-recaptcha";
 
-export const SignIn = () => {
+export const SignIn = ({ setScores }) => {
   const [email, setEmail] = useState("");
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
@@ -44,15 +44,15 @@ export const SignIn = () => {
       const formDataCopy = { ...change };
       let pass = zxcvbn(formDataCopy.password);
       setScore(pass.score);
+      setScores(pass.score);
     } else {
       setScore(0);
     }
   };
-
   useEffect(() => {
     if (user) {
       // user is already signed in
-      navigate("/welcome");
+      // navigate("/protected/welcome");
     } else {
       // user is not signed in but the link is valid
       if (isSignInWithEmailLink(auth, window.location.href)) {
@@ -74,12 +74,12 @@ export const SignIn = () => {
             localStorage.removeItem("email");
             setInitialLoading(false);
             setInitialError("");
-            navigate("/welcome");
+            navigate("/protected/welcome");
           })
           .catch((err) => {
             setInitialLoading(false);
             setInitialError(err.message);
-            navigate("/welcome");
+            navigate("/protected/welcome");
           });
       } else {
         // console.log("enter email and sign in");
@@ -92,7 +92,7 @@ export const SignIn = () => {
     e.preventDefault();
     setLoginLoading(true);
     sendSignInLinkToEmail(auth, email, {
-      url: "https://nija-cyber-app.onrender.com/welcome",
+      url: "https://nija-cyber-app.onrender.com/protected/welcome",
       handleCodeInApp: true,
     })
       .then(() => {
@@ -104,7 +104,9 @@ export const SignIn = () => {
       })
       .catch((err) => {
         setLoginLoading(false);
-        setLoginError(err.message);
+        if (err.code === "auth/quota-exceeded") {
+          setLoginError("You have exceeded daily quota for email sign-in.");
+        }
       });
   };
   return (
@@ -118,77 +120,70 @@ export const SignIn = () => {
               <div className="error-msg">{initialError}</div>
             ) : (
               <>
-                {user ? (
-                  <div>Please wait...</div>
-                ) : (
-                  <div className="form">
-                    <div className="form__content">
-                      <h2>Login with your register email</h2>
-                      <form onSubmit={handleSubmit}>
-                        <label>Email</label>
-                        <Input
-                          type={"email"}
-                          required
-                          variant={"filled"}
-                          placeholder="Enter Email"
-                          value={email || ""}
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <label>Password</label>
-                        <Input
-                          type="password"
-                          required
-                          onChange={handleChange}
-                          name="password"
-                          variant={"filled"}
-                          placeholder="Enter Password"
-                        />
-                        <span
-                          className="password-strength"
-                          data-score={score}
-                        />
+                <div className="form">
+                  <div className="form__content">
+                    <h2>Login with your register email</h2>
+                    <form onSubmit={handleSubmit}>
+                      <label>Email</label>
+                      <Input
+                        type={"email"}
+                        required
+                        variant={"filled"}
+                        placeholder="Enter Email"
+                        value={email || ""}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                      <label>Password</label>
+                      <Input
+                        type="password"
+                        required
+                        onChange={handleChange}
+                        name="password"
+                        variant={"filled"}
+                        placeholder="Enter Password"
+                      />
+                      <span className="password-strength" data-score={score} />
 
-                        <ReCAPTCHA
-                          sitekey="6Les7PolAAAAAEbGHpgfEDckNoKB04CcBaMKZ6T9"
-                          onChange={onChange}
-                          ref={captchaRef}
-                        />
+                      <ReCAPTCHA
+                        sitekey="6Les7PolAAAAAEbGHpgfEDckNoKB04CcBaMKZ6T9"
+                        onChange={onChange}
+                        ref={captchaRef}
+                      />
 
-                        <Box sx={{ pt: "20px" }}>
-                          {token ? (
-                            <Button
-                              type="submit"
-                              variant={"solid"}
-                              colorScheme="whatsapp"
-                            >
-                              {loginLoading ? (
-                                <span>Logging you in</span>
-                              ) : (
-                                <span>Login</span>
-                              )}
-                            </Button>
-                          ) : (
-                            <Button variant={"outline"} colorScheme="gray">
-                              Sign in
-                            </Button>
-                          )}
-                        </Box>
-                        {loginError !== "" && (
-                          <div className="error-msg">{loginError}</div>
+                      <Box sx={{ pt: "20px" }}>
+                        {token ? (
+                          <Button
+                            type="submit"
+                            variant={"solid"}
+                            colorScheme="whatsapp"
+                          >
+                            {loginLoading ? (
+                              <span>Logging you in</span>
+                            ) : (
+                              <span>Login</span>
+                            )}
+                          </Button>
+                        ) : (
+                          <Button variant={"outline"} colorScheme="gray">
+                            Sign in
+                          </Button>
                         )}
-                        {infoMsg !== "" && (
-                          <div className="info-msg">{infoMsg}</div>
-                        )}
-                        <div className="already">
-                          <p>
-                            Don't have an account?
-                            <Link to={"/login"}>Sign Up</Link>
-                          </p>
-                        </div>
-                      </form>
-                    </div>
+                      </Box>
+                      {loginError !== "" && (
+                        <div className="error-msg">{loginError}</div>
+                      )}
+                      {infoMsg !== "" && (
+                        <div className="info-msg">{infoMsg}</div>
+                      )}
+                      <div className="already">
+                        <p>
+                          Don't have an account?
+                          <Link to={"/login"}>Sign Up</Link>
+                        </p>
+                      </div>
+                    </form>
                   </div>
-                )}
+                </div>
               </>
             )}
           </>

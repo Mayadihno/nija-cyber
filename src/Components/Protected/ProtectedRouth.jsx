@@ -4,7 +4,7 @@ import UseAuth from "./UseAuth";
 const ProtectedRoute = () => {
   const { loading, loggedIn } = UseAuth();
   if (loading) {
-    return "Loading....";
+    return "Loading";
   }
   return loggedIn ? <Outlet /> : <Navigate to={"/login"} />;
 };
