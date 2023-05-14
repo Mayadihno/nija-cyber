@@ -31,14 +31,11 @@ const SignUp = () => {
     }
   };
 
-  const { password, fullname, email, phoneNumber, confirm } = change;
+  const { password, fullname, email, phoneNumber } = change;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (password !== confirm) {
-        toast.warning("password and confrim password are not correct");
-      }
       const users = await createUserWithEmailAndPassword(auth, email, password);
       updateProfile(auth.currentUser, {
         displayName: fullname,

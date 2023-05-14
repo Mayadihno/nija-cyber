@@ -11,7 +11,7 @@ const Cards = () => {
           <Card maxW={"md"}>
             <CardBody>
               <h2>
-                Welcome to Omotosho Oluwagbeminija Cyber Security Assignment
+                Welcome to Omotoso Oluwagbeminija Cyber Security Assignment
               </h2>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Button

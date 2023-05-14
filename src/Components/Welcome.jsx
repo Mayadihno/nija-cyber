@@ -35,7 +35,7 @@ const Welcome = () => {
           <Card maxW={"md"}>
             <CardBody sx={{ color: "black" }}>
               <h2>Welcome user</h2>
-              <h5>Thanks for making donation {allData.email} </h5>
+              <h5>Thanks {allData.email} </h5>
               <p>
                 Your Password Strength is score is {allData.score * 25}% Strong
               </p>
