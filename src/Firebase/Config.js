@@ -4,12 +4,12 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBJ8mTXFT1ElucNF1PUSLZR0jLKOiV8OG4",
-  authDomain: "react-cyber.firebaseapp.com",
-  projectId: "react-cyber",
-  storageBucket: "react-cyber.appspot.com",
-  messagingSenderId: "537792763120",
-  appId: "1:537792763120:web:5aba45ea7231d5085ade35",
+ apiKey: "AIzaSyBPKeQwV_Wyyzm6PHYYGEqwJ6p8hVTDcDA",
+  authDomain: "react-crownfit.firebaseapp.com",
+  projectId: "react-crownfit",
+  storageBucket: "react-crownfit.appspot.com",
+  messagingSenderId: "257661446655",
+  appId: "1:257661446655:web:ef80d46336756805c99fca"
 };
 
 // Initialize Firebase
